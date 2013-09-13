@@ -82,6 +82,7 @@ var renderLibrary = function() {
   };
 
 $('#add-book').on('click', function (e) {
+
   var add_title = $('#user-title').val();
   var add_author = $('#user-author').val();
   var new_book = {
@@ -89,12 +90,12 @@ $('#add-book').on('click', function (e) {
       author: add_author,
       status: 'available'
   };
-  books.push(new_book);
-
-  // var my_newBookHtml = bookTemplate(my_books);
-  renderLibrary();
-  
+ 
+  var my_newBookHtml = bookTemplate(new_book);
+  $('#library').append(my_newBookHtml);
 });
+
+renderLibrary();
 
 </script>
 
