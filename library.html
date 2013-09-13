@@ -22,17 +22,80 @@
 
 <h1>THE LIBRARY</h1>
 
+<label>Title:</label>
+<input id="user-title" type="text" />
+<label>Author:</label>
+<input id="user-author"  type="text" />
+
+<label id="add-author"></label>
+<button id="add-book" type="button">Add a Book</button>
+
 
 <div id="library"></div>
 
 <div id="templates">
 
+  <script class="book" type="text/template">
+    <div class="book">
+      <p h1><b><%= title %></b></p> 
+      <p h3><%= author%></p>
+      <p h5>Status: <%= status %></p>
+    </div>
+  </script>
 </div>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+
 <script type="text/javascript">
-  // TODO
+
+
+ 
+var bookTemplateHtml = $('#templates .book').html();
+var bookTemplate = _.template(bookTemplateHtml);
+
+
+var books = [
+  {
+    title: 'title 1',
+    author: 'author 1',
+    status: 'available'
+  },
+  {
+    title: 'title 2',
+    author: 'author 2',
+    status: 'available'
+  },
+  {
+    title: 'title 3',
+    author: 'author 3',
+    status: 'available'
+  }
+];
+
+var renderLibrary = function() {
+  for(var i=0; i<books.length; i+=1) {
+    var my_books = books[i];
+    var my_newBookHtml = bookTemplate(my_books);
+    $('#library').append(my_newBookHtml);  
+    };
+  };
+
+$('#add-book').on('click', function (e) {
+  var add_title = $('#user-title').val();
+  var add_author = $('#user-author').val();
+  var new_book = {
+      title: add_title,
+      author: add_author,
+      status: 'available'
+  };
+  books.push(new_book);
+
+  // var my_newBookHtml = bookTemplate(my_books);
+  renderLibrary();
+  
+});
+
 </script>
 
 <small>It's back.</small>
