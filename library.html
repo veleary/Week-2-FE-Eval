@@ -79,6 +79,7 @@ var renderLibrary = function() {
     var my_newBookHtml = bookTemplate(my_books);
     $('#library').append(my_newBookHtml);  
     };
+     
   };
 
 $('#add-book').on('click', function (e) {
@@ -90,9 +91,12 @@ $('#add-book').on('click', function (e) {
       author: add_author,
       status: 'available'
   };
- 
-  var my_newBookHtml = bookTemplate(new_book);
-  $('#library').append(my_newBookHtml);
+  $('#library').empty();
+  books.push(new_book);
+  renderLibrary();
+  // var my_newBookHtml = bookTemplate(books);
+  // $('#library').append(my_newBookHtml);
+  
 });
 
 renderLibrary();
